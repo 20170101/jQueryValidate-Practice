@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+		<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+		<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+		<script>
+			$.validator.setDefaults({
+				submitHandler:function(){
+					alert("提交事件！");
+				}
+			});
+			$().ready(function(){
+				// 在键盘按下并释放及提交后验证表单
+				$("#user-info").validate({
+					rules: {
+					  username: "required",
+					  password: {
+						required: true,
+						minlength: 5
+					  },
+					  confirm_password: {
+						required: true,
+						minlength: 5,
+						equalTo: "#password"
+					  },
+					  email: {
+						required: true,
+						email: true
+					  },
+					  agree: "required",
+					  "topic[]": {
+						required: "#newsletter:checked",
+						minlength: 2
+					  }
+					},
+					messages: {
+					  username: "请输入您的名字",
+					  password: {
+						required: "请输入密码",
+						minlength: "密码长度不能小于 5 个字母"
+					  },
+					  confirm_password: {
+						required: "请输入密码",
+						minlength: "密码长度不能小于 5 个字母",
+						equalTo: "两次密码输入不一致"
+					  },
+					  email: "请输入一个正确的邮箱",
+					  agree: "请接受我们的声明",
+					  topic: "请选择两个主题"
+					},
+					highlight: function (element, errorClass, validClass) {//可以给未通过验证的元素加效果、闪烁等。
+						$(element).addClass("has-error");
+					},
+					unhighlight: function (element, errorClass, validClass) {
+						$(element).removeClass("has-error");
+					}
+				});
+			});
+		</script>
+		<style>
+			.error{
+				color:orange;
+			}
+			.has-error{
+				border-color:lime
+			}
+		</style>
+	</head>
+	<body>
+		<form id="user-info" method="get" action="">
+			<fieldset>
+				<legend>验证完整的表单</legend>
+				<p>
+				  <label for="username">名字</label>
+				  <input id="username" name="username" type="text">
+				</p>
+				<p>
+				  <label for="password">密码</label>
+				  <input id="password" name="password" type="password">
+				</p>
+				<p>
+				  <label for="confirm_password">验证密码</label>
+				  <input id="confirm_password" name="confirm_password" type="password">
+				</p>
+				<p>
+				  <label for="email">Email</label>
+				  <input id="email" name="email" type="email">
+				</p>
+				<p>
+				  <label for="agree">请同意我们的声明</label>
+				  <input type="checkbox" class="checkbox" id="agree" name="agree">
+				</p>
+				<p>
+				  <label for="newsletter">我乐意接收新信息</label>
+				  <input type="checkbox" class="checkbox" id="newsletter" name="newsletter">
+				</p>
+				<fieldset id="newsletter_topics">
+				  <legend>主题 (至少选择两个) - 注意：如果没有勾选“我乐意接收新信息”以下选项会隐藏，但我们这里作为演示让它可见</legend>
+				  <label for="msg-1">
+					<input type="checkbox" id="msg-1" value="one" name="topic[]">消息1
+				  </label>
+				  <label for="msg-2">
+					<input type="checkbox" id="msg-2" value="two" name="topic[]">消息2
+				  </label>
+				  <label for="msg-3">
+					<input type="checkbox" id="msg-3" value="three" name="topic[]">消息3
+				  </label>
+				  <br>
+				  <label for="topic" class="error" style="display:none">至少选择两个</label>
+				</fieldset>
+				<p>
+				  <input class="submit" type="submit" value="提交">
+				</p>
+			</fieldset>
+		</form>
+	</body>
+</html>
