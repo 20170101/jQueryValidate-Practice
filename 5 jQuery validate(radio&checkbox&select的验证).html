@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+		<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+		<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+		<script>
+			$.validator.setDefaults({
+				submitHandler:function(){
+					alert("提交事件！");
+				}
+			});
+			$().ready(function(){
+				//提交时验证表单：
+				$("#user-info").validate();
+			})
+		</script>
+		<style>
+			.error{
+				color:red;
+			}
+		</style>
+	</head>
+	<body>
+		<form id="user-info" method="get" action="">
+			<p>radio的required表示必须选中一个:</P>
+			<input type="radio" id="male" value="m" name="gender" required>Male
+			<input type="radio" id="female" value="f" name="gender">Female			
+			<p>checkbox的required表示必须选中:</P>
+			<input type="checkbox" id="agree" name="agree" required>I agree.
+			<p>
+				checkbox 的 minlength 表示必须选中的最小个数，maxlength 表示最大的选中个数，rangelength:[2,3] 表示选中个数区间:
+			</P>
+			<p>minlength:</p>
+			<input type="checkbox" value="email" name="span[]" required minlength="2">email
+			<input type="checkbox" value="phone" name="span[]">phone
+			<input type="checkbox" value="fax" name="span[]">fax
+			<p>maxlength:</p>
+			<input type="checkbox" value="apple" name="fruit[]" required maxlength="2">apple
+			<input type="checkbox" value="orange" name="fruit[]">orange
+			<input type="checkbox" value="banana" name="fruit[]">banana
+			<p>rangelength:[2,3]:</p>
+			<input type="checkbox" value="worker" name="job[]" required rangelength="[2,3]">worker
+			<input type="checkbox" value="programmer" name="job[]">programmer
+			<input type="checkbox" value="doctor" name="job[]">doctor
+			<p>select 的 required 表示选中的 value 不能为空</p>
+			<select name="school" title="Please select something" required>
+				<option value=""></option>
+				<option value="1">student</option>
+				<option value="2">teacher</option>
+				<option value="3">headmaster</option>
+			</select>
+			<p>
+				select 的 minlength 表示选中的最小个数（可多选的 select），maxlength 表示最大的选中个数，rangelength:[2,3] 表示选中个数区间。
+			</p>
+			<select name="fruit" title="Please select at least two fruits" required minlength=2 multiple="multiple">
+				<option value="b">Banana</option>
+				<option value="a">Apple</option>
+				<option value="p">Peach</option>
+				<option value="o">orange</option>
+			</select>
+			
+			<select name="computer" title="最多只能选择2个外围设备" maxlength=2 multiple="multiple">
+				<option value="m">mouse</option>
+				<option value="k">keyboard</option>
+				<option value="s">screen</option>
+			</select>
+			
+			<select name="vehicle" title="请选择两到三个交通工具" required rangelength="[2,3]" multiple="multiple">
+				<option value="car">car</option>
+				<option value="airplane">airplane</option>
+				<option value="train">train</option>
+				<option value="walking">walking</option>
+			</select>
+			
+			<input type="submit" value="Submit">
+		</form>
+	</body>
+</html>
