@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="uft-8">
+		<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+		<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+		<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+		<script>
+			$.validator.setDefaults({//这个应该是重写方法用的，像这块就重写了submitHandler
+				submitHandler: function(){
+					alert("提交事件");
+				}
+			});
+			$().ready(function(){
+				$("#personal-info").validate();
+			});
+		</script>
+		<style>
+			.error{
+				color:yellowgreen;
+			}
+		</style>
+	</head>
+	<body>
+		<form id="personal-info" >	<!-- onsubmit="return false;" -->
+			<fieldset>
+				<legend>
+					Please input your info.
+				</legend>
+				<label for="personal-name">Name(必填，最少两个字母)</label>
+				<input type="text" id="personal-name" name="name" minlength="2" required>
+				<br>
+				<label for="personal-email">E-mail(必填)</label>
+				<input type="email" id="personal-email" name="email" required>
+				<br>
+				<label for="personal-url">Url(非必填)</label>
+				<input type="url" id="personal-url" name="url">
+				<br>
+				<input type="submit" value="Submit">
+			</fieldset>
+		</form>
+	</body>
+</html>
