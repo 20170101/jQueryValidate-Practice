@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+		<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+		<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+		<script>
+			$.validator.setDefaults({
+				submitHandler:function(){
+					alert("提交事件！");
+				}
+			});
+			$().ready(function(){
+				$.validator.addMethod('oddNumValidate', function(value, element){
+					if(value%2==0){
+						return false;
+					}
+					return true;
+				});
+				//提交时验证表单：
+				var validator=$("#user-info").validate({
+					onfocusout: function (element) {
+						$(element).valid();//这个得加，不然第一次进页面后让input获取焦点再失去焦点时不触发验证。
+					},
+					rules:{
+						oddNum:{
+							required:true,
+							oddNumValidate:true
+						}
+					},
+					messages:{
+						oddNum:{
+							required:'Please input an odd number.',
+							oddNumValidate:'This is not an odd number.'
+						}
+					}
+				});
+			})
+		</script>
+		<style>
+			.error{
+				color:red;
+			}
+		</style>
+	</head>
+	<body>
+		<form id="user-info" method="get" action="">
+			  <fieldset>
+				<legend>一自定义的奇数验证</legend>
+				<p>
+				  <label for="odd-num">奇数</label>
+				  <input id="odd-num" name="oddNum">
+				</p>
+				<p>
+				  <input class="submit" type="submit" value="Login">
+				</p>
+			  </fieldset>
+		</form>
+	</body>
+</html>
